@@ -11,7 +11,8 @@ const config = {
   until: 50,
   factors: [
     [3, 'fizz'],
-    [5, 'buzz']
+    [5, 'buzz'],
+    [6, '-baha']
   ]
 }
 // function view
@@ -43,15 +44,15 @@ function fizzbuzzFunctional (config) {
 function fizzbuzz (config) {
   const { from, until, factors } = config // sets constants for the config const
   const numbers = [...range(from, until)] // sets constant for numbers from and until
-  numbers
-    .filter(n => factors.some(arr => n % arr[0] === 0))
-    .map(factors.reduce(
-      (previous, next) => // prior, current, returns a new function item
-        item =>
+  numbers // filter the array into an array of numbers that can only be factored by 3 and or 5
+    .filter(n => factors.some(arr => n % arr[0] === 0)) // checks to see if any elements in the array can be factored by 3 or 5
+    .map(factors.reduce( //  creates a function that take one parameter - we want to turn an int into a string
+      (previous, next) => // prior, current
+        item => //
           item % next[0] === 0 // check to see if current number is div by 3 or 5
-            ? `${previous(item)}${next[1]}` // ? stands for 'then return'
-            : previous(item), // : stands for 'else return'
-    item => `${item}: `
+            ? `${previous(item)}${next[1]}` // ? if true, 'then return' something
+            : previous(item), // : else 'then return' something else
+    item => `${item}: ` // brakes down to printing a string ie. 3:
   ))
   .forEach(msg => console.log(msg))
 }
